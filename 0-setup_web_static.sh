@@ -16,7 +16,7 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 
 add="\\\n\
-        location /hbnb_static/ {\\
+        location /hbnb_static {\\
             alias /data/web_static/current/;\\
         }"
 
