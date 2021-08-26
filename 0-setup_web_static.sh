@@ -18,7 +18,6 @@ sudo chown -R ubuntu:ubuntu /data/
 add="\\\n\
         location /hbnb_static/ {\\
             alias /data/web_static/current/;\\
-            autoindex off;\\
         }"
 
 sudo sed -i "/server_name _;/a $add" /etc/nginx/sites-available/default
