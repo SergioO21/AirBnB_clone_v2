@@ -11,7 +11,6 @@ app = Flask(__name__)
 def states_list():
     """ Display a HTML page: (inside the tag BODY) """
     states = list(storage.all(State).values())
-    states.sort(key=lambda x: x.name)
     return render_template("7-states_list.html", states=states)
 
 
