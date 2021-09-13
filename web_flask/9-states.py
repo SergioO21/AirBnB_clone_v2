@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" Starts a Flask web application """
+"""Script that starts a Flask web application"""
+
 from flask import Flask, render_template
 from models.state import State
 from models import storage
@@ -7,30 +8,28 @@ from models import storage
 app = Flask(__name__)
 
 
-@app.route("/states", strict_slashes=False)
-@app.route("/states/<id>", strict_slashes=False)
-def states_id(id=None):
-    """ Display a HTML page: (inside the tag BODY) """
-    states = storage.all(State).values()
-
-    if id:
-        _id = id
-        state_id = None
-        for state in states:
-            if state.id == id:
-                state_id = state
-                break
-    else:
-        state_id = list(states)
-
-    return render_template("9-states.html", **locals())
-
-
 @app.teardown_appcontext
-def teardown_db(self):
-    """ Remove the current SQLAlchemy Session """
+def teardown(self):
+    """Removes the current SQLAlchemy Session"""
     storage.close()
 
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+@app.route('/states')
+@app.route('/states/<id>')
+def states_list(id=None):
+    """display States, object found by id State and its cities"""
+    states = storage.all(State).values()
+    if id:
+        _id = id
+        id_state = None
+        for state in states:
+            if state.id == _id:
+                id_state = state
+                break
+    else:
+        id_state = list(states)
+    return (render_template('9-states.html', **locals()))
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port='5000')
