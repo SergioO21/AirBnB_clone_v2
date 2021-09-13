@@ -12,9 +12,10 @@ app = Flask(__name__)
 def states_id(id=None):
     """ Display a HTML page: (inside the tag BODY) """
     states = storage.all(State).values()
-    _id = id
 
     if id:
+        _id = id
+        state_id = None
         for state in states:
             if state.id == id:
                 state_id = state
