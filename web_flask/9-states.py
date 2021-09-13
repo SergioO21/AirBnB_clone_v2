@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id=None):
     """ Display a HTML page: (inside the tag BODY) """
-    states = list(storage.all(State).values())
+    states = storage.all(State).values()
     _id = id
 
     if id:
