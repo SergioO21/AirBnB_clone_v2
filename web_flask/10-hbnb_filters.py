@@ -12,8 +12,8 @@ app = Flask(__name__)
 def hbnb_filters():
     """ Display a HTML page like 6-index.html """
     path = "10-hbnb_filters.html"
-    states = storage.all(State).values()
-    amenities = storage.all(Amenity).values()
+    states = list(storage.all(State).values())
+    amenities = list(storage.all(Amenity).values())
     states.sort(key=lambda x: x.name)
     amenities.sort(key=lambda x: x.name)
     return render_template(path, states=states, amenities=amenities)
